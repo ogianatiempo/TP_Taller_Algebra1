@@ -1,5 +1,5 @@
 -- Octavio, Gianatiempo - 280/10 - ogianatiempo@gmail.com
--- Jorge
+-- Jorge, Mamani Fernandez - 23/08 - papelyto_god@hotmail.com
 
 {-
 Ver si aplica para el TP pero no se sugiere usar:
