@@ -6,16 +6,27 @@ PENDIENTES:
 - Agregar ejemplos
 - Chequear que los nombres de las funciones esten bien
 - Comentarios explicando las funciones auxiliares
+- Volver a chequear si andan las funciones con el tipo para la Parte2
+- Adaptar cifrar reverso para que tome cesar y palabrasreverso
 -}
+
+-- Lo hacemos modulo para importarlo en la parte2 -----------------------------
+module Parte1
+  where
 
 -- Definicion de los tipos ----------------------------------------------------
 -- Renombre para tipo Texto
 type Texto = [Char]
 
--- Definición del tipo recursivo Mensaje
+-- Renombre para tipo Desplazamiento, es para la Parte2
+type Desplazamiento = Integer
+
+-- Definición del tipo recursivo Mensaje, sirve también para la Parte2
 data Mensaje = TextoClaro Texto
-              | CifradoReverso Mensaje
-              deriving (Eq, Show)
+               | CifradoReverso Mensaje
+               | CifradoCesar Mensaje Desplazamiento
+               | CifradoPalabrasReverso Mensaje
+               deriving (Eq, Show)
 
 -- Textos para probar las funciones: ----------------------------------------
 t1 :: Texto
@@ -73,14 +84,16 @@ reverso (t:ts) = reverso ts ++ [t]
 cifrarReverso :: Mensaje -> Mensaje
 cifrarReverso (TextoClaro t) = CifradoReverso (TextoClaro (reverso t))
 cifrarReverso (CifradoReverso m) = CifradoReverso (cifrarReverso m)
+--cifrarReverso (CifradoCesar m n) = CifradoCesar (cifrarReverso m) n
 
 -- Ejercicio 4 ----------------------------------------------------------------
--- Función extraerMensajeParaEnvio: dado un Mensaje devuelve un Texto listo
--- para ser enviado que se corresponde con el mensaje cifrado.
+--  Ya está adaptado para Parte2
 
 extraerMensajeParaEnvio :: Mensaje -> Texto
 extraerMensajeParaEnvio (TextoClaro t) = t
 extraerMensajeParaEnvio (CifradoReverso m) = extraerMensajeParaEnvio m
+extraerMensajeParaEnvio (CifradoCesar m n) = extraerMensajeParaEnvio m
+extraerMensajeParaEnvio (CifradoPalabrasReverso m) = extraerMensajeParaEnvio m
 
 -- Ejercicio 5 ----------------------------------------------------------------
 -- Función descifrar: dado un Mensaje nos permite recuperar el Texto que
