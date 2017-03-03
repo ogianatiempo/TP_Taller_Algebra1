@@ -58,7 +58,7 @@ subsetVerdadero [] [] = []
 subsetVerdadero (True:bs) (e:es) = e : subsetVerdadero bs es
 subsetVerdadero (False:bs) (e:es) = subsetVerdadero bs es
 
--- Dada una lista generada de caracteres devuelve las posiciones de los espacios
+-- Dada una lista de caracteres devuelve las posiciones de los espacios
 -- El primer caracter es el caracter 0
 posicionesEspacios :: String -> [Integer]
 posicionesEspacios s = subsetVerdadero (esEspacio s) (posiciones s 0)
