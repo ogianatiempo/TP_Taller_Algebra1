@@ -38,3 +38,27 @@ cifrarCesar (CifradoReverso m) n = CifradoReverso (cifrarCesar m n)
 cifrarCesar (CifradoPalabrasReverso m) n = CifradoPalabrasReverso (cifrarCesar m n)
 
 -- Ejercicio 9 ----------------------------------------------------------------
+
+-- Dada lista de caracteres devuelve True en las posiciones que hay espacios
+esEspacio :: String -> [Bool]
+esEspacio [] = []
+esEspacio (' ':cs) = True : esEspacio cs
+esEspacio (_:cs) = False : esEspacio cs
+
+-- Dada una lista y un nro inicial, asigna nros a las posiciones contando a
+-- partir del nro inicial
+posiciones :: [a] -> Integer -> [Integer]
+posiciones [] n = []
+posiciones (c:cs) n = n : posiciones cs (n+1)
+
+-- Dada una lista de Bools, selecciona de una lista los elementos que
+-- corresponden a posiciones que son True (las listas deben ser del mismo largo)
+subsetVerdadero :: [Bool] -> [a] -> [a]
+subsetVerdadero [] [] = []
+subsetVerdadero (True:bs) (e:es) = e : subsetVerdadero bs es
+subsetVerdadero (False:bs) (e:es) = subsetVerdadero bs es
+
+-- Dada una lista generada por esEspacio devuelve las posiciones de los espacios
+-- El primer caracter es el caracter 0
+posicionesEspacios :: String -> [Integer]
+posicionesEspacios s = subsetVerdadero (esEspacio s) (posiciones s 0)
