@@ -64,13 +64,16 @@ posicionesEspacios :: String -> [Integer]
 posicionesEspacios s = subsetVerdadero (esEspacio s) (posiciones s 0)
 
 -- Dado un string y un integer, recorta la parte izquierda del string para que
--- comience en la posicion indicada por el integer (la primera posicion es 0)
-stringAPartirDe :: String -> Integer -> String
-stringAPartirDe s 0 = s
-stringAPartirDe (c:cs) n = stringAPartirDe cs (n-1)
+-- comience justo después de la posicion indicada por el integer. Es decir se
+-- queda con la parte derecha.
+-- (la primera posicion es 0)
+derecha :: String -> Integer -> String
+derecha (c:cs) 0 = cs
+derecha (c:cs) n = derecha cs (n-1)
 
 -- Dado un string y un integer, recorta la parte derecha del string justo antes
--- de la posicion indicada por el integer (la primera posicion es 0)
-stringHasta :: String -> Integer -> String
-stringHasta s 0 = []
-stringHasta (c:cs) n = c : stringHasta cs (n-1)
+-- de la posicion indicada por el integer. Es decir, se queda con la parte
+-- izquierda (la primera posicion es 0)
+izquierda :: String -> Integer -> String
+izquierda s 0 = []
+izquierda (c:cs) n = c : izquierda cs (n-1)
