@@ -91,10 +91,13 @@ izquierda (c:cs) n = c : izquierda cs (n-1)
 -- VACIAS, PERO ESTO ES BUENO PARA QUE DESPUES listaPalabrasAString AGREGUE
 -- DICHOS ESPACIOS. ES MEDIO DESPROLIJO PERO ANDA, PENSAR MEJOR FORMA
 listaPalabras :: String -> [Integer] -> Integer -> [String]
+-- Casos base
 listaPalabras s [] 0 = [s] -- Esto seria una sola palabra sin espacios
-listaPalabras s [] e = derecha s e : []
-listaPalabras s (0:es) 0 = izquierda s 0 : listaPalabras s es 0 -- Esto seria un String que empieza con espacio y estamos en la primer palabra
-listaPalabras (' ':s) (e:es) n = derecha (izquierda (' ':s) e) n : listaPalabras (' ':s) es e -- Esto seria un String que empieza con espacio y ya no estamos en la primer palabra
+listaPalabras s [] e = derecha s e : [] -- Esto seria la última palabra de un string
+-- Casos que inician con espacio
+listaPalabras s (0:es) 0 = izquierda s 0 : listaPalabras s es 0
+listaPalabras (' ':s) (e:es) n = derecha (izquierda (' ':s) e) n : listaPalabras (' ':s) es e
+-- Casos que no inician con espacio
 listaPalabras s (e:es) 0 = izquierda s e : listaPalabras s es e
 listaPalabras s (e:es) n = derecha (izquierda s e) n : listaPalabras s es e
 
