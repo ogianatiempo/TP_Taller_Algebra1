@@ -44,6 +44,12 @@ t4 = "ANANA"
 t5 :: Texto
 t5 = "OJOTA"
 
+t6 :: Texto
+t6 = "LINEA C RETIRO CONSTITUCION "
+
+t7 :: Texto
+t7 = "UNO DOS TRES PROBANDO"
+
 
 -- Ejercicio 1 ----------------------------------------------------------------
 -- Funcion crearMensaje: dado un Texto devuelve un Mensaje en TextoClaro
@@ -84,7 +90,8 @@ reverso (t:ts) = reverso ts ++ [t]
 cifrarReverso :: Mensaje -> Mensaje
 cifrarReverso (TextoClaro t) = CifradoReverso (TextoClaro (reverso t))
 cifrarReverso (CifradoReverso m) = CifradoReverso (cifrarReverso m)
---cifrarReverso (CifradoCesar m n) = CifradoCesar (cifrarReverso m) n
+cifrarReverso (CifradoCesar m n) = CifradoCesar (cifrarReverso m) n
+cifrarReverso (CifradoPalabrasReverso m) = CifradoPalabrasReverso (cifrarReverso m)
 
 -- Ejercicio 4 ----------------------------------------------------------------
 --  Ya está adaptado para Parte2
