@@ -62,3 +62,15 @@ subsetVerdadero (False:bs) (e:es) = subsetVerdadero bs es
 -- El primer caracter es el caracter 0
 posicionesEspacios :: String -> [Integer]
 posicionesEspacios s = subsetVerdadero (esEspacio s) (posiciones s 0)
+
+-- Dado un string y un integer, recorta la parte izquierda del string para que
+-- comience en la posicion indicada por el integer (la primera posicion es 0)
+stringAPartirDe :: String -> Integer -> String
+stringAPartirDe s 0 = s
+stringAPartirDe (c:cs) n = stringAPartirDe cs (n-1)
+
+-- Dado un string y un integer, recorta la parte derecha del string justo antes
+-- de la posicion indicada por el integer (la primera posicion es 0)
+stringHasta :: String -> Integer -> String
+stringHasta s 0 = []
+stringHasta (c:cs) n = c : stringHasta cs (n-1)
