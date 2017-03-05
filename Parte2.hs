@@ -14,7 +14,7 @@ next d = succ d
 -- Importamos la Parte1 -------------------------------------------------------
 import Parte1
 
--- Ejercicio 8 ----------------------------------------------------------------
+-- EJERCICIO 8 ----------------------------------------------------------------
 siguiente :: Char -> Char
 siguiente 'Z' = 'A'
 siguiente ' ' = ' '
@@ -37,7 +37,7 @@ cifrarCesar (CifradoCesar m n1) n2 = CifradoCesar (cifrarCesar m n2) n1
 cifrarCesar (CifradoReverso m) n = CifradoReverso (cifrarCesar m n)
 cifrarCesar (CifradoPalabrasReverso m) n = CifradoPalabrasReverso (cifrarCesar m n)
 
--- Ejercicio 9 ----------------------------------------------------------------
+-- EJERCICIO 9 ----------------------------------------------------------------
 
 -- Dada lista de caracteres devuelve True en las posiciones que hay espacios.
 -- Es funcion auxiliar de posicionesEspacios
