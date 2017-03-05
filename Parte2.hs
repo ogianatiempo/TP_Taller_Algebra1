@@ -5,17 +5,25 @@
 import Parte1
 
 -- EJERCICIO 8 ----------------------------------------------------------------
+-- Dado un caracter, devuelve el caracter siguiente.
+-- Es funcion auxiliar de cifrarCaracter
 siguiente :: Char -> Char
 siguiente 'Z' = 'A'
 siguiente ' ' = ' '
 siguiente c = succ c
 
+-- Dado un caracter y un Desplazamiento, devuelve el caracter que resulta de la
+-- aplicacion de dicho desplazamiento.
+-- Es función auxiliar de cifrarTexto
 cifrarCaracter :: Char -> Desplazamiento -> Char
 cifrarCaracter c 0 = c
 cifrarCaracter c 1 = siguiente c
 cifrarCaracter c n | n > 0 = siguiente (cifrarCaracter c ((mod n 26)-1))
                    | otherwise = cifrarCaracter c (n+26)
 
+-- Dado un texto y un Desplazamiento, desplaza cada caracter del texto de forma
+-- recursiva según el Desplazamiento indicado.
+-- Es función auxiliar de cifrarCesar
 cifrarTexto :: Texto -> Desplazamiento -> Texto
 cifrarTexto [] n = []
 cifrarTexto (c:cs) n = cifrarCaracter c n : cifrarTexto cs n
@@ -43,22 +51,22 @@ posiciones [] n = []
 posiciones (c:cs) n = n : posiciones cs (n+1)
 
 -- Dada una lista de Bools, selecciona de una lista los elementos que
--- corresponden a posiciones que son True (las listas deben ser del mismo largo)
+-- corresponden a posiciones que son True (las listas deben ser del mismo largo).
 -- Es funcion auxiliar de posicionesEspacios
 subsetVerdadero :: [Bool] -> [a] -> [a]
 subsetVerdadero [] [] = []
 subsetVerdadero (True:bs) (e:es) = e : subsetVerdadero bs es
 subsetVerdadero (False:bs) (e:es) = subsetVerdadero bs es
 
--- Dada una lista de caracteres devuelve las posiciones de los espacios
--- El primer caracter es el caracter 0
+-- Dada una lista de caracteres devuelve las posiciones de los espacios.
+-- El primer caracter es el caracter 0.
 -- Es funcion auxiliar de reversoPalabras
 posicionesEspacios :: String -> [Integer]
 posicionesEspacios s = subsetVerdadero (esEspacio s) (posiciones s 0)
 
 -- Dado un string y un integer, recorta la parte izquierda del string para que
 -- comience justo después de la posicion indicada por el integer. Es decir se
--- queda con la parte derecha. (la primera posicion es 0)
+-- queda con la parte derecha. (la primera posicion es 0).
 -- Es funcion auxiliar de listaPalabras
 derecha :: String -> Integer -> String
 derecha (c:cs) 0 = cs
@@ -66,7 +74,7 @@ derecha (c:cs) n = derecha cs (n-1)
 
 -- Dado un string y un integer, recorta la parte derecha del string justo antes
 -- de la posicion indicada por el integer. Es decir, se queda con la parte
--- izquierda. (la primera posicion es 0)
+-- izquierda. (la primera posicion es 0).
 -- Es funcion auxiliar de listaPalabras
 izquierda :: String -> Integer -> String
 izquierda s 0 = []
@@ -90,20 +98,21 @@ listaPalabras (' ':s) (e:es) n = derecha (izquierda (' ':s) e) n : listaPalabras
 listaPalabras s (e:es) 0 = izquierda s e : listaPalabras s es e
 listaPalabras s (e:es) n = derecha (izquierda s e) n : listaPalabras s es e
 
--- Dada una lista de palabras, revierte cada una de ellas
+-- Dada una lista de palabras, revierte cada una de ellas.
 -- Es funcion auxiliar de reversoPalabras
 reversoListaPalabras :: [String] -> [String]
 reversoListaPalabras [] = []
 reversoListaPalabras (p:ps) = reverso p : reversoListaPalabras ps
 
 -- Dada una lista de palabras genera un string con las palabras separadas por
--- espacios
+-- espacios.
 -- Es funcion auxiliar de reversoPalabras
 listaPalabrasAString :: [String] -> String
 listaPalabrasAString (p:[]) = p
 listaPalabrasAString (p:ps) = p ++ " " ++ listaPalabrasAString ps
 
--- Esta es la funcion auxiliar de cifrarPalabrasReverso
+-- Dado un texto, devuelve cada palabra del texto al revés.
+-- Es funcion auxiliar de cifrarPalabrasReverso
 reversoPalabras :: String -> String
 reversoPalabras s = listaPalabrasAString (reversoListaPalabras (listaPalabras s (posicionesEspacios s) 0))
 
