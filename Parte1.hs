@@ -89,6 +89,7 @@ esMensajeCifrado :: Mensaje -> Bool
 esMensajeCifrado (TextoClaro t) = False
 esMensajeCifrado _ = True
 
+
 -- EJERCICIO 3 ----------------------------------------------------------------
 -- Función cifrarReverso: dado un Mensaje, lo encripta con el cifrado reverso.
 
@@ -103,11 +104,13 @@ cifrarReverso (CifradoCesar m n) = CifradoCesar (cifrarReverso m) n
 cifrarReverso (CifradoPalabrasReverso m) = CifradoPalabrasReverso (cifrarReverso m)
 
 -- Ejemplo función cifrarReverso
+--
 -- *Main> cifrarReverso (TextoClaro "EL POSTRE")
 -- CifradoReverso (TextoClaro "ERTSOP LE")
 --
 -- *Main> cifrarReverso (cifrarReverso (TextoClaro "EL POSTRE"))
 -- CifradoReverso (CifradoReverso (TextoClaro "EL POSTRE"))
+
 
 -- EJERCICIO 4 ----------------------------------------------------------------
 --  Ya está adaptado para Parte2
@@ -118,6 +121,13 @@ extraerMensajeParaEnvio (CifradoReverso m) = extraerMensajeParaEnvio m
 extraerMensajeParaEnvio (CifradoCesar m n) = extraerMensajeParaEnvio m
 extraerMensajeParaEnvio (CifradoPalabrasReverso m) = extraerMensajeParaEnvio m
 
+-- Ejemplo Función extraerMensajeParaEnvio
+--
+-- *Main> extraerMensajeParaEnvio (CifradoReverso (TextoClaro "ERTSOP LE"))
+-- "ERTSOP LE"
+-- it :: Texto
+
+
 -- EJERCICIO 5 ----------------------------------------------------------------
 -- Función descifrar: dado un Mensaje nos permite recuperar el Texto que
 -- contiene la información que fue ocultada.
@@ -126,6 +136,13 @@ descifrar :: Mensaje -> Texto
 descifrar (TextoClaro t) = t
 descifrar (CifradoReverso m) = reverso (descifrar m)
 
+-- Ejemplo función descifrar
+--
+-- *Main> descifrar (CifradoReverso (TextoClaro "ERTSOP LE"))
+-- "EL POSTRE"
+-- it :: Texto
+
+
 -- EJERCICIO 6 ----------------------------------------------------------------
 -- función esAptoReverso: dado un Mensaje, devielve True si el cifrado reverso
 -- tiene sentido ser aplicado, es decir, si complica un poco la lectura del
@@ -133,3 +150,16 @@ descifrar (CifradoReverso m) = reverso (descifrar m)
 
 esAptoReverso :: Mensaje -> Bool
 esAptoReverso m = extraerMensajeParaEnvio m /= extraerMensajeParaEnvio (cifrarReverso m)
+
+-- Ejemplo función esAptoReverso
+--
+-- *Main> esAptoReverso (TextoClaro "sopapos")
+-- False
+-- it :: Bool
+--
+-- *Main> esAptoReverso (TextoClaro "sopa")
+-- True
+-- it :: Bool
+
+
+
