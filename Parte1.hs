@@ -102,6 +102,13 @@ cifrarReverso (CifradoReverso m) = CifradoReverso (cifrarReverso m)
 cifrarReverso (CifradoCesar m n) = CifradoCesar (cifrarReverso m) n
 cifrarReverso (CifradoPalabrasReverso m) = CifradoPalabrasReverso (cifrarReverso m)
 
+-- Ejemplo función cifrarReverso
+-- *Main> cifrarReverso (TextoClaro "EL POSTRE")
+-- CifradoReverso (TextoClaro "ERTSOP LE")
+--
+-- *Main> cifrarReverso (cifrarReverso (TextoClaro "EL POSTRE"))
+-- CifradoReverso (CifradoReverso (TextoClaro "EL POSTRE"))
+
 -- EJERCICIO 4 ----------------------------------------------------------------
 --  Ya está adaptado para Parte2
 
