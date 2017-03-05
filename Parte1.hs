@@ -160,6 +160,3 @@ esAptoReverso m = extraerMensajeParaEnvio m /= extraerMensajeParaEnvio (cifrarRe
 -- *Main> esAptoReverso (TextoClaro "sopa")
 -- True
 -- it :: Bool
-
-
-
