@@ -65,9 +65,6 @@ izquierda (c:cs) n = c : izquierda cs (n-1)
 -- que representa el espacio anterior (debe ser 0 al inicio), separa
 -- las palabras del Texto y las pone en una lista.
 -- Es funcion auxiliar de reversoPalabras
--- OJO QUE SI HUBIERA ESPACIOS AL PRINCIPIO O AL FINAL LOS TOMA COMO PALABRAS
--- VACIAS, PERO ESTO ES BUENO PARA QUE DESPUES listaPalabrasATexto AGREGUE
--- DICHOS ESPACIOS. ES MEDIO DESPROLIJO PERO ANDA, PENSAR MEJOR FORMA
 listaPalabras :: Texto -> [Integer] -> Integer -> [Texto]
 -- Casos base
 listaPalabras s [] 0 = [s] -- Esto seria una sola palabra sin espacios
