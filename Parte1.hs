@@ -51,7 +51,7 @@ t7 :: Texto
 t7 = "UNO DOS TRES PROBANDO"
 
 
--- Ejercicio 1 ----------------------------------------------------------------
+-- EJERCICIO 1 ----------------------------------------------------------------
 -- Funcion crearMensaje: dado un Texto devuelve un Mensaje en TextoClaro
 -- Debe chequear que el Texto este compuesto de cualquier elemento de la lista
 -- de la A a la Z y espacios. Sino se debe indefinir
@@ -71,8 +71,17 @@ esTextoPermitido (l:ls) = esCaracterPermitido l && esTextoPermitido ls
 crearMensaje :: Texto -> Mensaje
 crearMensaje t | esTextoPermitido t && length t > 0 = TextoClaro t
 
+-- Ejemplos Función crearMensaje
+--
+-- *Main> crearMensaje "HOLA QUE TAL"
+-- TextoClaro "HOLA QUE TAL"
+-- it :: Mensaje
+--
+-- *Main> crearMensaje "Hola que tal"
+-- *** Exception: Parte1.hs:72:1-50: Non-exhaustive patterns in function crearMensaje
 
--- Ejercicio 2 ----------------------------------------------------------------
+
+-- EJERCICIO 2 ----------------------------------------------------------------
 -- Función esMensajeCifrado: dado un Mensaje devuelve True si y sólo si el
 -- Mensaje ya ha sido cifrado.
 
@@ -80,7 +89,7 @@ esMensajeCifrado :: Mensaje -> Bool
 esMensajeCifrado (TextoClaro t) = False
 esMensajeCifrado _ = True
 
--- Ejercicio 3 ----------------------------------------------------------------
+-- EJERCICIO 3 ----------------------------------------------------------------
 -- Función cifrarReverso: dado un Mensaje, lo encripta con el cifrado reverso.
 
 reverso :: Texto -> Texto
@@ -93,7 +102,7 @@ cifrarReverso (CifradoReverso m) = CifradoReverso (cifrarReverso m)
 cifrarReverso (CifradoCesar m n) = CifradoCesar (cifrarReverso m) n
 cifrarReverso (CifradoPalabrasReverso m) = CifradoPalabrasReverso (cifrarReverso m)
 
--- Ejercicio 4 ----------------------------------------------------------------
+-- EJERCICIO 4 ----------------------------------------------------------------
 --  Ya está adaptado para Parte2
 
 extraerMensajeParaEnvio :: Mensaje -> Texto
@@ -102,7 +111,7 @@ extraerMensajeParaEnvio (CifradoReverso m) = extraerMensajeParaEnvio m
 extraerMensajeParaEnvio (CifradoCesar m n) = extraerMensajeParaEnvio m
 extraerMensajeParaEnvio (CifradoPalabrasReverso m) = extraerMensajeParaEnvio m
 
--- Ejercicio 5 ----------------------------------------------------------------
+-- EJERCICIO 5 ----------------------------------------------------------------
 -- Función descifrar: dado un Mensaje nos permite recuperar el Texto que
 -- contiene la información que fue ocultada.
 
@@ -110,7 +119,7 @@ descifrar :: Mensaje -> Texto
 descifrar (TextoClaro t) = t
 descifrar (CifradoReverso m) = reverso (descifrar m)
 
--- Ejercicio 6 ----------------------------------------------------------------
+-- EJERCICIO 6 ----------------------------------------------------------------
 -- función esAptoReverso: dado un Mensaje, devielve True si el cifrado reverso
 -- tiene sentido ser aplicado, es decir, si complica un poco la lectura del
 -- mensaje.
