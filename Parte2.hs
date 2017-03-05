@@ -10,12 +10,11 @@ siguiente 'Z' = 'A'
 siguiente ' ' = ' '
 siguiente c = succ c
 
--- Por ahora funciona solo para Desplazamientos positivos, pensar que pasa con
--- Desplazamientos negativos
 cifrarCaracter :: Char -> Desplazamiento -> Char
 cifrarCaracter c 0 = c
 cifrarCaracter c 1 = siguiente c
-cifrarCaracter c n = siguiente (cifrarCaracter c ((mod n 27)-1))
+cifrarCaracter c n | n > 0 = siguiente (cifrarCaracter c ((mod n 26)-1))
+                   | otherwise = cifrarCaracter c (n+26)
 
 cifrarTexto :: Texto -> Desplazamiento -> Texto
 cifrarTexto [] n = []
