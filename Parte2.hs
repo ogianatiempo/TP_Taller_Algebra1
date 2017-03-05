@@ -5,6 +5,7 @@
 import Parte1
 
 -- EJERCICIO 8 ----------------------------------------------------------------
+
 -- Dado un caracter, devuelve el caracter siguiente.
 -- Es funcion auxiliar de cifrarCaracter
 siguiente :: Char -> Char
@@ -116,7 +117,6 @@ listaPalabrasAString (p:ps) = p ++ " " ++ listaPalabrasAString ps
 reversoPalabras :: String -> String
 reversoPalabras s = listaPalabrasAString (reversoListaPalabras (listaPalabras s (posicionesEspacios s) 0))
 
--- cifrarPalabrasReverso
 cifrarPalabrasReverso :: Mensaje -> Mensaje
 cifrarPalabrasReverso (TextoClaro t) = CifradoPalabrasReverso (TextoClaro (reversoPalabras t))
 cifrarPalabrasReverso (CifradoCesar m n1) = CifradoCesar (cifrarPalabrasReverso m) n1
