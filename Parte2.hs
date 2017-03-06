@@ -99,3 +99,18 @@ cifrarPalabrasReverso (TextoClaro t) = CifradoPalabrasReverso (TextoClaro (rever
 cifrarPalabrasReverso (CifradoCesar m n1) = CifradoCesar (cifrarPalabrasReverso m) n1
 cifrarPalabrasReverso (CifradoReverso m) = CifradoReverso (cifrarPalabrasReverso m)
 cifrarPalabrasReverso (CifradoPalabrasReverso m)= CifradoPalabrasReverso (cifrarPalabrasReverso m)
+
+-- EJERCICIO 10 ------------------------------------------------------------------
+-- Si definimos acá descifrar usando funciones de la parte2, si cargamos sólo
+-- la parte1 andará? Probar y sinó consultar.
+
+descifrar :: Mensaje -> Texto
+descifrar (TextoClaro t) = t
+descifrar (CifradoReverso m) = reverso (descifrar m)
+descifrar (CifradoCesar m n) = cifrarTexto (descifrar m) (-n)
+descifrar (CifradoPalabrasReverso m) = reversoPalabras (descifrar m)
+-- Ejemplo función descifrar
+--
+-- *Main> descifrar (CifradoReverso (TextoClaro "ERTSOP LE"))
+-- "EL POSTRE"
+-- it :: Texto

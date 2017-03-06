@@ -132,26 +132,7 @@ extraerMensajeParaEnvio (CifradoPalabrasReverso m) = extraerMensajeParaEnvio m
 -- Función descifrar: dado un Mensaje nos permite recuperar el Texto que
 -- contiene la información que fue ocultada.
 
--- Para descifrar CifradoPalabrasReverso basta con aplicar la funcion de cifrado
--- tantas veces como sea necesario (de manera análoga a como hicimos en
--- CifradoReverso).
-
--- Para descifrar CifradoCesar hay que aplicar la funcion de cifrado pero con el
--- desplazamiento opuesto al desplzamiento original (es decir 2 y -2).
-
--- Si definimos acá descifrar usando funciones de la parte2, si cargamos sólo
--- la parte1 andará? Probar y sinó consultar.
-
-descifrar :: Mensaje -> Texto
-descifrar (TextoClaro t) = t
-descifrar (CifradoReverso m) = reverso (descifrar m)
-
--- Ejemplo función descifrar
---
--- *Main> descifrar (CifradoReverso (TextoClaro "ERTSOP LE"))
--- "EL POSTRE"
--- it :: Texto
-
+-- LA PASAMOS A LA PARTE2 Y LA EXTENDIMOS!!!
 
 -- EJERCICIO 6 ----------------------------------------------------------------
 -- función esAptoReverso: dado un Mensaje, devielve True si el cifrado reverso
