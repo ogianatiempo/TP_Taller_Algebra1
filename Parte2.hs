@@ -37,33 +37,13 @@ cifrarCesar (CifradoPalabrasReverso m) n = CifradoPalabrasReverso (cifrarCesar m
 
 -- EJERCICIO 9 ----------------------------------------------------------------
 
--- Dada un Texto devuelve True en las posiciones que hay espacios.
--- Es funcion auxiliar de posicionesEspacios
-esEspacio :: Texto -> [Bool]
-esEspacio [] = []
-esEspacio (' ':cs) = True : esEspacio cs
-esEspacio (_:cs) = False : esEspacio cs
-
--- Dada una lista y un nro inicial, asigna nros a las posiciones contando a
--- partir del nro inicial.
--- Es funcion auxiliar de posicionesEspacios
-posiciones :: [a] -> Integer -> [Integer]
-posiciones [] n = []
-posiciones (c:cs) n = n : posiciones cs (n+1)
-
--- Dada una lista de Bools, selecciona de una lista los elementos que
--- corresponden a posiciones que son True (las listas deben ser del mismo largo).
--- Es funcion auxiliar de posicionesEspacios
-subsetVerdadero :: [Bool] -> [a] -> [a]
-subsetVerdadero [] [] = []
-subsetVerdadero (True:bs) (e:es) = e : subsetVerdadero bs es
-subsetVerdadero (False:bs) (e:es) = subsetVerdadero bs es
-
--- Dada un Texto devuelve las posiciones de los espacios.
--- El primer caracter es el caracter 0.
+-- Dado un Texto y un Integer que representa el valor para la posicion del
+-- primer caracter del texto, devuelve las posiciones de los espacios.
 -- Es funcion auxiliar de reversoPalabras
-posicionesEspacios :: Texto -> [Integer]
-posicionesEspacios s = subsetVerdadero (esEspacio s) (posiciones s 0)
+posicionesEspacios :: Texto -> Integer -> [Integer]
+posicionesEspacios [] n = []
+posicionesEspacios (' ':cs) n = n : posicionesEspacios cs (n+1)
+posicionesEspacios (c:cs) n = posicionesEspacios cs (n+1)
 
 -- Dado un Texto y un Integer, recorta la parte izquierda del texto para que
 -- comience justo después de la posicion indicada por el integer. Es decir se
@@ -85,9 +65,6 @@ izquierda (c:cs) n = c : izquierda cs (n-1)
 -- que representa el espacio anterior (debe ser 0 al inicio), separa
 -- las palabras del Texto y las pone en una lista.
 -- Es funcion auxiliar de reversoPalabras
--- OJO QUE SI HUBIERA ESPACIOS AL PRINCIPIO O AL FINAL LOS TOMA COMO PALABRAS
--- VACIAS, PERO ESTO ES BUENO PARA QUE DESPUES listaPalabrasATexto AGREGUE
--- DICHOS ESPACIOS. ES MEDIO DESPROLIJO PERO ANDA, PENSAR MEJOR FORMA
 listaPalabras :: Texto -> [Integer] -> Integer -> [Texto]
 -- Casos base
 listaPalabras s [] 0 = [s] -- Esto seria una sola palabra sin espacios
@@ -115,7 +92,7 @@ listaPalabrasATexto (p:ps) = p ++ " " ++ listaPalabrasATexto ps
 -- Dado un texto, devuelve cada palabra del texto al revés.
 -- Es funcion auxiliar de cifrarPalabrasReverso
 reversoPalabras :: Texto -> Texto
-reversoPalabras s = listaPalabrasATexto (reversoListaPalabras (listaPalabras s (posicionesEspacios s) 0))
+reversoPalabras s = listaPalabrasATexto (reversoListaPalabras (listaPalabras s (posicionesEspacios s 0) 0))
 
 cifrarPalabrasReverso :: Mensaje -> Mensaje
 cifrarPalabrasReverso (TextoClaro t) = CifradoPalabrasReverso (TextoClaro (reversoPalabras t))
