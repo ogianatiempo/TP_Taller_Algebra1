@@ -35,6 +35,21 @@ cifrarCesar (CifradoCesar m n1) n2 = CifradoCesar (cifrarCesar m n2) n1
 cifrarCesar (CifradoReverso m) n = CifradoReverso (cifrarCesar m n)
 cifrarCesar (CifradoPalabrasReverso m) n = CifradoPalabrasReverso (cifrarCesar m n)
 
+-- Ejemplo función cifrarCesar
+--
+-- CifradoCesar (TextoClaro "IPMB UJP MVDBT") 1
+-- it :: Mensaje
+--
+-- *Main> cifrarCesar (TextoClaro "HOLA TIO LUCAS") (-5)
+-- CifradoCesar (TextoClaro "CJGV ODJ GPXVN") (-5)
+-- it :: Mensaje
+--
+-- *Main> cifrarCesar (CifradoReverso (CifradoPalabrasReverso (TextoClaro "LUCAS TIO HOLA"))) 1
+-- CifradoReverso (CifradoPalabrasReverso (CifradoCesar (TextoClaro "MVDBT UJP IPMB") 1))
+-- it :: Mensaje
+
+
+
 -- EJERCICIO 9 ----------------------------------------------------------------
 
 -- Dado un Texto y un Integer que representa el valor para la posicion del
@@ -109,6 +124,7 @@ descifrar (TextoClaro t) = t
 descifrar (CifradoReverso m) = reverso (descifrar m)
 descifrar (CifradoCesar m n) = cifrarTexto (descifrar m) (-n)
 descifrar (CifradoPalabrasReverso m) = reversoPalabras (descifrar m)
+
 -- Ejemplo función descifrar
 --
 -- *Main> descifrar (CifradoReverso (TextoClaro "ERTSOP LE"))
