@@ -129,7 +129,6 @@ cifrarReverso (CifradoPalabrasReverso m) = CifradoPalabrasReverso (cifrarReverso
 -- it :: Mensaje 
 
 
-
 -- EJERCICIO 4 ----------------------------------------------------------------
 --  Ya está adaptado para Parte2
 
@@ -143,6 +142,10 @@ extraerMensajeParaEnvio (CifradoPalabrasReverso m) = extraerMensajeParaEnvio m
 --
 -- *Main> extraerMensajeParaEnvio (CifradoReverso (TextoClaro "ERTSOP LE"))
 -- "ERTSOP LE"
+-- it :: Texto
+--
+-- *Main> extraerMensajeParaEnvio (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
+-- "VCTQNCU JQNC"
 -- it :: Texto
 
 
