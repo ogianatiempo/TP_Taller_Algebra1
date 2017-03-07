@@ -89,6 +89,19 @@ esMensajeCifrado :: Mensaje -> Bool
 esMensajeCifrado (TextoClaro t) = False
 esMensajeCifrado _ = True
 
+-- *Main> esMensajeCifrado (TextoClaro "HOLA TAROLAS")
+-- False
+-- it :: Bool
+--
+-- *Main> esMensajeCifrado (CifradoReverso (TextoClaro "SALORAT ALOH"))
+-- True
+-- it :: Bool
+--
+-- *Main> esMensajeCifrado (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
+-- True
+-- it :: Bool
+
+
 
 -- EJERCICIO 3 ----------------------------------------------------------------
 -- Función cifrarReverso: dado un Mensaje, lo encripta con el cifrado reverso.
@@ -110,6 +123,11 @@ cifrarReverso (CifradoPalabrasReverso m) = CifradoPalabrasReverso (cifrarReverso
 --
 -- *Main> cifrarReverso (cifrarReverso (TextoClaro "EL POSTRE"))
 -- CifradoReverso (CifradoReverso (TextoClaro "EL POSTRE"))
+--
+-- *Main> cifrarReverso (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
+-- CifradoReverso (CifradoCesar (CifradoPalabrasReverso (CifradoReverso (TextoClaro "CNQJ UCNQTCV"))) 2)
+-- it :: Mensaje 
+
 
 
 -- EJERCICIO 4 ----------------------------------------------------------------
