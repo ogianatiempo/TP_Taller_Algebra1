@@ -114,3 +114,7 @@ descifrar (CifradoPalabrasReverso m) = reversoPalabras (descifrar m)
 -- *Main> descifrar (CifradoReverso (TextoClaro "ERTSOP LE"))
 -- "EL POSTRE"
 -- it :: Texto
+-- 
+-- *Main> descifrar (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
+-- "HOLA TAROLAS"
+-- it :: Texto
