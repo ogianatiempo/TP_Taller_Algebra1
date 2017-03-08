@@ -5,10 +5,10 @@
 -- Renombre para tipo Texto
 type Texto = [Char]
 
--- Renombre para tipo Desplazamiento, es para la Parte2
+-- Renombre para tipo Desplazamiento
 type Desplazamiento = Integer
 
--- Definición del tipo recursivo Mensaje, sirve también para la Parte2
+-- Definición del tipo recursivo Mensaje extendido (EJERCICIO 7)
 data Mensaje = TextoClaro Texto
                | CifradoReverso Mensaje
                | CifradoCesar Mensaje Desplazamiento
@@ -39,6 +39,7 @@ t7 = "UNO DOS TRES PROBANDO"
 
 
 -- Funciones de la parte1 extendidas (EJERCICIO 10) ----------------------------
+-- EJERCICIO 1 -----------------------------------------------------------------
 pertenece :: Char -> String -> Bool
 pertenece c [] = False
 pertenece c (l:ls) = c == l || pertenece c ls
@@ -80,8 +81,6 @@ esMensajeCifrado _ = True
 -- True
 -- it :: Bool
 
-
-
 -- EJERCICIO 3 -----------------------------------------------------------------
 reverso :: Texto -> Texto
 reverso [] = []
@@ -105,7 +104,6 @@ cifrarReverso (CifradoPalabrasReverso m) = CifradoPalabrasReverso (cifrarReverso
 -- CifradoReverso (CifradoCesar (CifradoPalabrasReverso (CifradoReverso (TextoClaro "CNQJ UCNQTCV"))) 2)
 -- it :: Mensaje
 
-
 -- EJERCICIO 4 -----------------------------------------------------------------
 extraerMensajeParaEnvio :: Mensaje -> Texto
 extraerMensajeParaEnvio (TextoClaro t) = t
@@ -122,7 +120,6 @@ extraerMensajeParaEnvio (CifradoPalabrasReverso m) = extraerMensajeParaEnvio m
 -- *Main> extraerMensajeParaEnvio (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
 -- "VCTQNCU JQNC"
 -- it :: Texto
-
 
 -- EJERCICIO 5 -----------------------------------------------------------------
 descifrar :: Mensaje -> Texto
@@ -142,7 +139,6 @@ descifrar (CifradoPalabrasReverso m) = reversoPalabras (descifrar m)
 -- it :: Texto
 
 -- EJERCICIO 6 -----------------------------------------------------------------
-
 esAptoReverso :: Mensaje -> Bool
 esAptoReverso m = extraerMensajeParaEnvio m /= extraerMensajeParaEnvio (cifrarReverso m)
 
@@ -199,8 +195,6 @@ cifrarCesar (CifradoPalabrasReverso m) n = CifradoPalabrasReverso (cifrarCesar m
 -- *Main> cifrarCesar (CifradoReverso (CifradoPalabrasReverso (TextoClaro "LUCAS TIO HOLA"))) 1
 -- CifradoReverso (CifradoPalabrasReverso (CifradoCesar (TextoClaro "MVDBT UJP IPMB") 1))
 -- it :: Mensaje
-
-
 
 -- EJERCICIO 9 ----------------------------------------------------------------
 
@@ -276,7 +270,3 @@ cifrarPalabrasReverso (CifradoPalabrasReverso m)= CifradoPalabrasReverso (cifrar
 -- *Main> cifrarPalabrasReverso (cifrarCesar (cifrarReverso (TextoClaro "EN EL CUARTO OSCURO")) 2)
 -- CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "QUEWTQ EWCTVQ GN GP")) 2)
 -- it :: Mensaje
---
--- *Main> extraerMensajeParaEnvio (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "QUEWTQ EWCTVQ GN GP")) 2))
--- "QUEWTQ EWCTVQ GN GP"
--- it :: Texto
