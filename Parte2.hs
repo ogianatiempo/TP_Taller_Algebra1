@@ -1,7 +1,7 @@
 -- Octavio, Gianatiempo - 280/10 - ogianatiempo@gmail.com
 -- Jorge, Mamani Fernandez - 23/08 - papelyto_god@hotmail.com
 
--- Definicion de los tipos ----------------------------------------------------
+-- Definicion de los tipos -----------------------------------------------------
 -- Renombre para tipo Texto
 type Texto = [Char]
 
@@ -15,7 +15,7 @@ data Mensaje = TextoClaro Texto
                | CifradoPalabrasReverso Mensaje
                deriving (Eq, Show)
 
--- Textos para probar las funciones: ----------------------------------------
+-- Textos para probar las funciones: -------------------------------------------
 t1 :: Texto
 t1 = "TENGA USTED BUENAS TARDES"
 
@@ -38,12 +38,7 @@ t7 :: Texto
 t7 = "UNO DOS TRES PROBANDO"
 
 
--- EJERCICIO 1 ----------------------------------------------------------------
--- Funcion crearMensaje: dado un Texto devuelve un Mensaje en TextoClaro
--- Debe chequear que el Texto este compuesto de cualquier elemento de la lista
--- de la A a la Z y espacios. Sino se debe indefinir
-
-
+-- Funciones de la parte1 extendidas (EJERCICIO 10) ----------------------------
 pertenece :: Char -> String -> Bool
 pertenece c [] = False
 pertenece c (l:ls) = c == l || pertenece c ls
@@ -65,13 +60,10 @@ crearMensaje t | esTextoPermitido t && length t > 0 = TextoClaro t
 -- it :: Mensaje
 --
 -- *Main> crearMensaje "Hola que tal"
--- *** Exception: Parte1.hs:72:1-50: Non-exhaustive patterns in function crearMensaje
+-- *** Exception: Parte1.hs:72:1-50: Non-exhaustive patterns in function
+-- crearMensaje
 
-
--- EJERCICIO 2 ----------------------------------------------------------------
--- Función esMensajeCifrado: dado un Mensaje devuelve True si y sólo si el
--- Mensaje ya ha sido cifrado.
-
+-- EJERCICIO 2 -----------------------------------------------------------------
 esMensajeCifrado :: Mensaje -> Bool
 esMensajeCifrado (TextoClaro t) = False
 esMensajeCifrado _ = True
@@ -90,9 +82,7 @@ esMensajeCifrado _ = True
 
 
 
--- EJERCICIO 3 ----------------------------------------------------------------
--- Función cifrarReverso: dado un Mensaje, lo encripta con el cifrado reverso.
-
+-- EJERCICIO 3 -----------------------------------------------------------------
 reverso :: Texto -> Texto
 reverso [] = []
 reverso (t:ts) = reverso ts ++ [t]
@@ -116,9 +106,7 @@ cifrarReverso (CifradoPalabrasReverso m) = CifradoPalabrasReverso (cifrarReverso
 -- it :: Mensaje
 
 
--- EJERCICIO 4 ----------------------------------------------------------------
---  Ya está adaptado para Parte2
-
+-- EJERCICIO 4 -----------------------------------------------------------------
 extraerMensajeParaEnvio :: Mensaje -> Texto
 extraerMensajeParaEnvio (TextoClaro t) = t
 extraerMensajeParaEnvio (CifradoReverso m) = extraerMensajeParaEnvio m
@@ -136,10 +124,7 @@ extraerMensajeParaEnvio (CifradoPalabrasReverso m) = extraerMensajeParaEnvio m
 -- it :: Texto
 
 
--- EJERCICIO 5 ----------------------------------------------------------------
--- Función descifrar: dado un Mensaje nos permite recuperar el Texto que
--- contiene la información que fue ocultada.
-
+-- EJERCICIO 5 -----------------------------------------------------------------
 descifrar :: Mensaje -> Texto
 descifrar (TextoClaro t) = t
 descifrar (CifradoReverso m) = reverso (descifrar m)
@@ -156,12 +141,7 @@ descifrar (CifradoPalabrasReverso m) = reversoPalabras (descifrar m)
 -- "HOLA TAROLAS"
 -- it :: Texto
 
--- EJERCICIO 6 ----------------------------------------------------------------
--- función esAptoReverso: dado un Mensaje, devielve True si el cifrado reverso
--- tiene sentido ser aplicado, es decir, si complica un poco la lectura del
--- mensaje.
-
--- Se podría hacer una función análoga para CifradoPalabrasReverso
+-- EJERCICIO 6 -----------------------------------------------------------------
 
 esAptoReverso :: Mensaje -> Bool
 esAptoReverso m = extraerMensajeParaEnvio m /= extraerMensajeParaEnvio (cifrarReverso m)
@@ -192,7 +172,7 @@ cifrarCaracter :: Char -> Desplazamiento -> Char
 cifrarCaracter c 0 = c
 cifrarCaracter c 1 = siguiente c
 cifrarCaracter c n | n > 0 = siguiente (cifrarCaracter c ((mod n 26)-1))
-                   | otherwise = cifrarCaracter c (n+26)
+                   | otherwise = cifrarCaracter c (mod n 26)
 
 -- Dado un texto y un Desplazamiento, desplaza cada caracter del texto de forma
 -- recursiva según el Desplazamiento indicado.
@@ -255,7 +235,7 @@ izquierda (c:cs) n = c : izquierda cs (n-1)
 listaPalabras :: Texto -> [Integer] -> Integer -> [Texto]
 -- Casos base
 listaPalabras s [] 0 = [s] -- Esto seria una sola palabra sin espacios
-listaPalabras s [] e = derecha s e : [] -- Esto seria la última palabra de un texto
+listaPalabras s [] e = derecha s e : [] -- Esto es la última palabra de un texto
 -- Casos que inician con espacio
 listaPalabras s (0:es) 0 = izquierda s 0 : listaPalabras s es 0
 listaPalabras (' ':s) (e:es) n = derecha (izquierda (' ':s) e) n : listaPalabras (' ':s) es e
