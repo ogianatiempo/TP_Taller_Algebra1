@@ -138,7 +138,6 @@ descifrar (CifradoReverso m) = reverso (descifrar m)
 -- "HOLA TAROLAS"
 -- it :: Texto
 
---
 
 -- EJERCICIO 6 ----------------------------------------------------------------
 -- función esAptoReverso: dado un Mensaje, devielve True si el cifrado reverso
@@ -150,10 +149,10 @@ esAptoReverso m = extraerMensajeParaEnvio m /= extraerMensajeParaEnvio (cifrarRe
 
 -- Ejemplo función esAptoReverso
 --
--- *Main> esAptoReverso (TextoClaro "sopapos")
+-- *Main> esAptoReverso (TextoClaro "SOPAPOS")
 -- False
 -- it :: Bool
 --
--- *Main> esAptoReverso (TextoClaro "sopa")
+-- *Main> esAptoReverso (TextoClaro "SOPA")
 -- True
 -- it :: Bool
