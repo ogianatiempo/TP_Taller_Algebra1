@@ -7,31 +7,7 @@
 type Texto = [Char]
 
 -- Definición del tipo recursivo Mensaje
-data Mensaje = TextoClaro Texto
-               | CifradoReverso Mensaje
-               deriving (Eq, Show)
-
--- Textos para probar las funciones: ----------------------------------------
-t1 :: Texto
-t1 = "TENGA USTED BUENAS TARDES"
-
-t2 :: Texto
-t2 = "SIEMPRE REVERSO"
-
-t3 :: Texto
-t3 = "NEUQUEN"
-
-t4 :: Texto
-t4 = "ANANA"
-
-t5 :: Texto
-t5 = "OJOTA"
-
-t6 :: Texto
-t6 = "LINEA C RETIRO CONSTITUCION "
-
-t7 :: Texto
-t7 = "UNO DOS TRES PROBANDO"
+data Mensaje = TextoClaro Texto | CifradoReverso Mensaje   deriving (Eq, Show)
 
 -- EJERCICIO 1 ----------------------------------------------------------------
 -- Funcion crearMensaje: dado un Texto devuelve un Mensaje en TextoClaro
