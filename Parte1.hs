@@ -134,6 +134,11 @@ descifrar (CifradoReverso m) = reverso (descifrar m)
 -- "EL POSTRE"
 -- it :: Texto
 --
+-- *Main> descifrar (cifrarReverso (cifrarReverso (TextoClaro "HOLA TAROLAS")))
+-- "HOLA TAROLAS"
+-- it :: Texto
+
+--
 
 -- EJERCICIO 6 ----------------------------------------------------------------
 -- función esAptoReverso: dado un Mensaje, devielve True si el cifrado reverso
