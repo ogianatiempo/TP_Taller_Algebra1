@@ -115,6 +115,21 @@ cifrarPalabrasReverso (CifradoCesar m n1) = CifradoCesar (cifrarPalabrasReverso 
 cifrarPalabrasReverso (CifradoReverso m) = CifradoReverso (cifrarPalabrasReverso m)
 cifrarPalabrasReverso (CifradoPalabrasReverso m)= CifradoPalabrasReverso (cifrarPalabrasReverso m)
 
+-- Ejemplo función cifrarPalabrasReverso
+--
+-- *Main> cifrarPalabrasReverso (TextoClaro "EN EL CUARTO OSCURO")
+-- CifradoPalabrasReverso (TextoClaro "NE LE OTRAUC ORUCSO")
+-- it :: Mensaje
+-- 
+-- *Main> cifrarPalabrasReverso (cifrarCesar (cifrarReverso (TextoClaro "EN EL CUARTO OSCURO")) 2)
+-- CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "QUEWTQ EWCTVQ GN GP")) 2)
+-- it :: Mensaje
+--
+-- *Main> extraerMensajeParaEnvio (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "QUEWTQ EWCTVQ GN GP")) 2))
+-- "QUEWTQ EWCTVQ GN GP"
+-- it :: Texto
+
+
 -- EJERCICIO 10 ------------------------------------------------------------------
 -- Si definimos acá descifrar usando funciones de la parte2, si cargamos sólo
 -- la parte1 andará? Probar y sinó consultar.
