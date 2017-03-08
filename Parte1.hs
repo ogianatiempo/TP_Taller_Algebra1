@@ -1,31 +1,14 @@
 -- Octavio, Gianatiempo - 280/10 - ogianatiempo@gmail.com
 -- Jorge, Mamani Fernandez - 23/08 - papelyto_god@hotmail.com
 
-{-
-PENDIENTES:
-- Agregar ejemplos
-- Chequear que los nombres de las funciones esten bien
-- Comentarios explicando las funciones auxiliares
-- Volver a chequear si andan las funciones con el tipo para la Parte2
-- Adaptar cifrar reverso para que tome cesar y palabrasreverso
--}
-
--- Lo hacemos modulo para importarlo en la parte2 -----------------------------
-module Parte1
-  where
 
 -- Definicion de los tipos ----------------------------------------------------
 -- Renombre para tipo Texto
 type Texto = [Char]
 
--- Renombre para tipo Desplazamiento, es para la Parte2
-type Desplazamiento = Integer
-
--- Definición del tipo recursivo Mensaje, sirve también para la Parte2
+-- Definición del tipo recursivo Mensaje
 data Mensaje = TextoClaro Texto
                | CifradoReverso Mensaje
-               | CifradoCesar Mensaje Desplazamiento
-               | CifradoPalabrasReverso Mensaje
                deriving (Eq, Show)
 
 -- Textos para probar las funciones: ----------------------------------------
@@ -50,12 +33,10 @@ t6 = "LINEA C RETIRO CONSTITUCION "
 t7 :: Texto
 t7 = "UNO DOS TRES PROBANDO"
 
-
 -- EJERCICIO 1 ----------------------------------------------------------------
 -- Funcion crearMensaje: dado un Texto devuelve un Mensaje en TextoClaro
 -- Debe chequear que el Texto este compuesto de cualquier elemento de la lista
 -- de la A a la Z y espacios. Sino se debe indefinir
-
 
 pertenece :: Char -> String -> Bool
 pertenece c [] = False
@@ -96,11 +77,6 @@ esMensajeCifrado _ = True
 -- *Main> esMensajeCifrado (CifradoReverso (TextoClaro "SALORAT ALOH"))
 -- True
 -- it :: Bool
---
--- *Main> esMensajeCifrado (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
--- True
--- it :: Bool
-
 
 
 -- EJERCICIO 3 ----------------------------------------------------------------
@@ -113,8 +89,6 @@ reverso (t:ts) = reverso ts ++ [t]
 cifrarReverso :: Mensaje -> Mensaje
 cifrarReverso (TextoClaro t) = CifradoReverso (TextoClaro (reverso t))
 cifrarReverso (CifradoReverso m) = CifradoReverso (cifrarReverso m)
-cifrarReverso (CifradoCesar m n) = CifradoCesar (cifrarReverso m) n
-cifrarReverso (CifradoPalabrasReverso m) = CifradoPalabrasReverso (cifrarReverso m)
 
 -- Ejemplo función cifrarReverso
 --
@@ -123,10 +97,6 @@ cifrarReverso (CifradoPalabrasReverso m) = CifradoPalabrasReverso (cifrarReverso
 --
 -- *Main> cifrarReverso (cifrarReverso (TextoClaro "EL POSTRE"))
 -- CifradoReverso (CifradoReverso (TextoClaro "EL POSTRE"))
---
--- *Main> cifrarReverso (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
--- CifradoReverso (CifradoCesar (CifradoPalabrasReverso (CifradoReverso (TextoClaro "CNQJ UCNQTCV"))) 2)
--- it :: Mensaje 
 
 
 -- EJERCICIO 4 ----------------------------------------------------------------
@@ -135,32 +105,39 @@ cifrarReverso (CifradoPalabrasReverso m) = CifradoPalabrasReverso (cifrarReverso
 extraerMensajeParaEnvio :: Mensaje -> Texto
 extraerMensajeParaEnvio (TextoClaro t) = t
 extraerMensajeParaEnvio (CifradoReverso m) = extraerMensajeParaEnvio m
-extraerMensajeParaEnvio (CifradoCesar m n) = extraerMensajeParaEnvio m
-extraerMensajeParaEnvio (CifradoPalabrasReverso m) = extraerMensajeParaEnvio m
+
 
 -- Ejemplo Función extraerMensajeParaEnvio
+--
+-- *Main> extraerMensajeParaEnvio (TextoClaro "EL POSTRE")
+-- "EL POSTRE"
+-- it :: Texto
 --
 -- *Main> extraerMensajeParaEnvio (CifradoReverso (TextoClaro "ERTSOP LE"))
 -- "ERTSOP LE"
 -- it :: Texto
 --
--- *Main> extraerMensajeParaEnvio (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
--- "VCTQNCU JQNC"
--- it :: Texto
 
 
 -- EJERCICIO 5 ----------------------------------------------------------------
 -- Función descifrar: dado un Mensaje nos permite recuperar el Texto que
 -- contiene la información que fue ocultada.
 
--- LA PASAMOS A LA PARTE2 Y LA EXTENDIMOS!!!
+descifrar :: Mensaje -> Texto
+descifrar (TextoClaro t) = t
+descifrar (CifradoReverso m) = reverso (descifrar m)
+
+-- Ejemplo función descifrar
+--
+-- *Main> descifrar (CifradoReverso (TextoClaro "ERTSOP LE"))
+-- "EL POSTRE"
+-- it :: Texto
+--
 
 -- EJERCICIO 6 ----------------------------------------------------------------
 -- función esAptoReverso: dado un Mensaje, devielve True si el cifrado reverso
 -- tiene sentido ser aplicado, es decir, si complica un poco la lectura del
 -- mensaje.
-
--- Se podría hacer una función análoga para CifradoPalabrasReverso
 
 esAptoReverso :: Mensaje -> Bool
 esAptoReverso m = extraerMensajeParaEnvio m /= extraerMensajeParaEnvio (cifrarReverso m)
