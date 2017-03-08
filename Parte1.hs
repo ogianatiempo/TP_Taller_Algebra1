@@ -100,7 +100,8 @@ cifrarReverso (CifradoReverso m) = CifradoReverso (cifrarReverso m)
 
 
 -- EJERCICIO 4 ----------------------------------------------------------------
---  Ya está adaptado para Parte2
+-- Función extraerMensajeParaenvio: dado un Mensaje nos develve un Texto listo 
+-- para ser enviado, que se corresponde con el mensaje ya cifrado.
 
 extraerMensajeParaEnvio :: Mensaje -> Texto
 extraerMensajeParaEnvio (TextoClaro t) = t
@@ -121,7 +122,7 @@ extraerMensajeParaEnvio (CifradoReverso m) = extraerMensajeParaEnvio m
 
 -- EJERCICIO 5 ----------------------------------------------------------------
 -- Función descifrar: dado un Mensaje nos permite recuperar el Texto que
--- contiene la información que fue ocultada.
+-- contiene la información que fue oculta.
 
 descifrar :: Mensaje -> Texto
 descifrar (TextoClaro t) = t
