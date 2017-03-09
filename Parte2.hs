@@ -46,6 +46,8 @@ esMensajeCifrado :: Mensaje -> Bool
 esMensajeCifrado (TextoClaro t) = False
 esMensajeCifrado _ = True
 
+-- Ejemplo de la función esMensajeCifrado
+--
 -- *Main> esMensajeCifrado (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
 -- True
 -- it :: Bool
@@ -65,6 +67,8 @@ cifrarReverso (CifradoReverso m) = CifradoReverso (cifrarReverso m)
 cifrarReverso (CifradoCesar m n) = CifradoCesar (cifrarReverso m) n
 cifrarReverso (CifradoPalabrasReverso m) = CifradoPalabrasReverso (cifrarReverso m)
 
+-- Ejemplo función cifrarReverso extendida
+--
 -- *Main> cifrarReverso (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
 -- CifradoReverso (CifradoCesar (CifradoPalabrasReverso (CifradoReverso (TextoClaro "CNQJ UCNQTCV"))) 2)
 -- it :: Mensaje
@@ -80,7 +84,7 @@ extraerMensajeParaEnvio (CifradoReverso m) = extraerMensajeParaEnvio m
 extraerMensajeParaEnvio (CifradoCesar m n) = extraerMensajeParaEnvio m
 extraerMensajeParaEnvio (CifradoPalabrasReverso m) = extraerMensajeParaEnvio m
 
--- Ejemplo Función extraerMensajeParaEnvio
+-- Ejemplo Función extraerMensajeParaEnvio extendida
 --
 -- *Main> extraerMensajeParaEnvio (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
 -- "VCTQNCU JQNC"
@@ -97,7 +101,7 @@ descifrar (CifradoReverso m) = reverso (descifrar m)
 descifrar (CifradoCesar m n) = cifrarTexto (descifrar m) (-n)
 descifrar (CifradoPalabrasReverso m) = reversoPalabras (descifrar m)
 
--- Ejemplo función descifrar
+-- Ejemplo función descifrar extendida
 --
 -- *Main> descifrar (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
 -- "HOLA TAROLAS"
