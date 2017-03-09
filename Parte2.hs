@@ -21,6 +21,8 @@ data Mensaje = TextoClaro Texto
 
 -- Funciones de la parte1 extendidas (EJERCICIO 10) ----------------------------
 -- EJERCICIO 1 -----------------------------------------------------------------
+-- Sin cambios respecto de la Parte 1. 
+
 pertenece :: Char -> String -> Bool
 pertenece c [] = False
 pertenece c (l:ls) = c == l || pertenece c ls
@@ -35,34 +37,24 @@ esTextoPermitido (l:ls) = esCaracterPermitido l && esTextoPermitido ls
 crearMensaje :: Texto -> Mensaje
 crearMensaje t | esTextoPermitido t && length t > 0 = TextoClaro t
 
--- Ejemplos Función crearMensaje
---
--- *Main> crearMensaje "HOLA QUE TAL"
--- TextoClaro "HOLA QUE TAL"
--- it :: Mensaje
---
--- *Main> crearMensaje "Hola que tal"
--- *** Exception: Parte1.hs:72:1-50: Non-exhaustive patterns in function
--- crearMensaje
 
 -- EJERCICIO 2 -----------------------------------------------------------------
+-- Sin cambios respecto de la Parte 1, ya que la función me sigue percibiendo
+-- cualquier Mensaje, que no se TextoClaro, como mensaje cifrado.
+
 esMensajeCifrado :: Mensaje -> Bool
 esMensajeCifrado (TextoClaro t) = False
 esMensajeCifrado _ = True
 
--- *Main> esMensajeCifrado (TextoClaro "HOLA TAROLAS")
--- False
--- it :: Bool
---
--- *Main> esMensajeCifrado (CifradoReverso (TextoClaro "SALORAT ALOH"))
--- True
--- it :: Bool
---
 -- *Main> esMensajeCifrado (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
 -- True
 -- it :: Bool
 
+
 -- EJERCICIO 3 -----------------------------------------------------------------
+-- Se realizó una extención de la función cifrarReverso, de modo que acepte también
+-- Mensajes de los tipos CifradoCesar y CifradoPalabrasReverso.
+
 reverso :: Texto -> Texto
 reverso [] = []
 reverso (t:ts) = reverso ts ++ [t]
@@ -73,19 +65,15 @@ cifrarReverso (CifradoReverso m) = CifradoReverso (cifrarReverso m)
 cifrarReverso (CifradoCesar m n) = CifradoCesar (cifrarReverso m) n
 cifrarReverso (CifradoPalabrasReverso m) = CifradoPalabrasReverso (cifrarReverso m)
 
--- Ejemplo función cifrarReverso
---
--- *Main> cifrarReverso (TextoClaro "EL POSTRE")
--- CifradoReverso (TextoClaro "ERTSOP LE")
---
--- *Main> cifrarReverso (cifrarReverso (TextoClaro "EL POSTRE"))
--- CifradoReverso (CifradoReverso (TextoClaro "EL POSTRE"))
---
 -- *Main> cifrarReverso (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
 -- CifradoReverso (CifradoCesar (CifradoPalabrasReverso (CifradoReverso (TextoClaro "CNQJ UCNQTCV"))) 2)
 -- it :: Mensaje
 
+
 -- EJERCICIO 4 -----------------------------------------------------------------
+-- Se realizó una extención de la función extraerMensajeParaEnvio, de modo que acepte también
+-- Mensajes de los tipos CifradoCesar y CifradoPalabrasReverso.
+
 extraerMensajeParaEnvio :: Mensaje -> Texto
 extraerMensajeParaEnvio (TextoClaro t) = t
 extraerMensajeParaEnvio (CifradoReverso m) = extraerMensajeParaEnvio m
@@ -94,15 +82,15 @@ extraerMensajeParaEnvio (CifradoPalabrasReverso m) = extraerMensajeParaEnvio m
 
 -- Ejemplo Función extraerMensajeParaEnvio
 --
--- *Main> extraerMensajeParaEnvio (CifradoReverso (TextoClaro "ERTSOP LE"))
--- "ERTSOP LE"
--- it :: Texto
---
 -- *Main> extraerMensajeParaEnvio (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
 -- "VCTQNCU JQNC"
 -- it :: Texto
 
+
 -- EJERCICIO 5 -----------------------------------------------------------------
+-- Se realizó una extención de la función descifrar, de modo que desencripte también
+-- Mensajes de los tipos CifradoCesar y CifradoPalabrasReverso.
+
 descifrar :: Mensaje -> Texto
 descifrar (TextoClaro t) = t
 descifrar (CifradoReverso m) = reverso (descifrar m)
@@ -111,27 +99,16 @@ descifrar (CifradoPalabrasReverso m) = reversoPalabras (descifrar m)
 
 -- Ejemplo función descifrar
 --
--- *Main> descifrar (CifradoReverso (TextoClaro "ERTSOP LE"))
--- "EL POSTRE"
--- it :: Texto
---
 -- *Main> descifrar (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
 -- "HOLA TAROLAS"
 -- it :: Texto
 
+
 -- EJERCICIO 6 -----------------------------------------------------------------
+-- Sin cambios respecto de la Parte 1.
+
 esAptoReverso :: Mensaje -> Bool
 esAptoReverso m = extraerMensajeParaEnvio m /= extraerMensajeParaEnvio (cifrarReverso m)
-
--- Ejemplo función esAptoReverso
---
--- *Main> esAptoReverso (TextoClaro "SOPAPOS")
--- False
--- it :: Bool
---
--- *Main> esAptoReverso (TextoClaro "SOPA")
--- True
--- it :: Bool
 
 
 
