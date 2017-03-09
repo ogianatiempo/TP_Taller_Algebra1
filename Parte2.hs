@@ -129,25 +129,25 @@ esAptoReverso m = extraerMensajeParaEnvio m /= extraerMensajeParaEnvio (cifrarRe
 -- Función cifradoCesar: Dado un Mensaje y un Desplazamiento, devuelve un Mensaje
 -- encriptado con el cifrado Cesar (con el dezplazamiento indicado).
 
--- Dado un caracter, devuelve el caracter siguiente.
--- Es funcion auxiliar de cifrarCaracter
+-- Función auxiliar siguiente: dado un caracter, devuelve el caracter siguiente.
+-- Es funcion auxiliar de cifrarCaracter.
 siguiente :: Char -> Char
 siguiente 'Z' = 'A'
 siguiente ' ' = ' '
 siguiente c = succ c
 
--- Dado un caracter y un Desplazamiento, devuelve el caracter que resulta de la
--- aplicacion de dicho desplazamiento.
--- Es función auxiliar de cifrarTexto
+-- Función auxiliar cifrarCaracter: dado un caracter y un Desplazamiento,
+-- devuelve el caracter que resulta de la aplicacion de dicho desplazamiento.
+-- Es función auxiliar de cifrarTexto.
 cifrarCaracter :: Char -> Desplazamiento -> Char
 cifrarCaracter c 0 = c
 cifrarCaracter c 1 = siguiente c
 cifrarCaracter c n | n > 0 = siguiente (cifrarCaracter c ((mod n 26)-1))
                    | otherwise = cifrarCaracter c (mod n 26)
 
--- Dado un texto y un Desplazamiento, desplaza cada caracter del texto de forma
--- recursiva según el Desplazamiento indicado.
--- Es función auxiliar de cifrarCesar
+-- Función auxiliar cifrarTexto: dado un texto y un Desplazamiento, desplaza
+-- cada caracter del texto de forma recursiva según el Desplazamiento indicado.
+-- Es función auxiliar de cifrarCesar.
 cifrarTexto :: Texto -> Desplazamiento -> Texto
 cifrarTexto [] n = []
 cifrarTexto (c:cs) n = cifrarCaracter c n : cifrarTexto cs n
@@ -159,9 +159,6 @@ cifrarCesar (CifradoReverso m) n = CifradoReverso (cifrarCesar m n)
 cifrarCesar (CifradoPalabrasReverso m) n = CifradoPalabrasReverso (cifrarCesar m n)
 
 -- Ejemplo función cifrarCesar
---
--- CifradoCesar (TextoClaro "IPMB UJP MVDBT") 1
--- it :: Mensaje
 --
 -- *Main> cifrarCesar (TextoClaro "HOLA TIO LUCAS") (-5)
 -- CifradoCesar (TextoClaro "CJGV ODJ GPXVN") (-5)
@@ -177,31 +174,35 @@ cifrarCesar (CifradoPalabrasReverso m) n = CifradoPalabrasReverso (cifrarCesar m
 -- Función cifrarPalabrasReverso: Dado un Mensaje, me lo cifra con el método del
 -- cifrado de las Palabras Reverso.
 
--- Dado un Texto y un Integer que representa el valor para la posicion del
--- primer caracter del texto, devuelve las posiciones de los espacios.
--- Es funcion auxiliar de reversoPalabras
+-- Función auxiliar posicionesEspacios: dado un Texto y un Integer que
+-- representa el valor para la posicion del primer caracter del texto, devuelve
+-- las posiciones de los espacios.
+-- Es funcion auxiliar de reversoPalabras.
 posicionesEspacios :: Texto -> Integer -> [Integer]
 posicionesEspacios [] n = []
 posicionesEspacios (' ':cs) n = n : posicionesEspacios cs (n+1)
 posicionesEspacios (c:cs) n = posicionesEspacios cs (n+1)
 
--- Dado un Texto y un Integer, recorta la parte izquierda del texto para que
--- comience justo después de la posicion indicada por el integer. Es decir se
--- queda con la parte derecha. (la primera posicion es 0).
+-- Función auxiliar derecha: dado un Texto y un Integer, recorta la parte
+-- izquierda del texto para que comience justo después de la posicion indicada
+-- por el integer. Es decir, se queda con la parte derecha.
+-- Asume que la primera posicion es 0.
 -- Es funcion auxiliar de listaPalabras
 derecha :: Texto -> Integer -> Texto
 derecha (c:cs) 0 = cs
 derecha (c:cs) n = derecha cs (n-1)
 
--- Dado un texto y un integer, recorta la parte derecha del texto justo antes
--- de la posicion indicada por el integer. Es decir, se queda con la parte
--- izquierda. (la primera posicion es 0).
+-- Función auxiliar izuqierda: dado un texto y un integer, recorta la parte
+-- derecha del texto justo antes de la posicion indicada por el integer. Es
+-- decir, se queda con la parte izquierda.
+-- Asume que la primera posicion es 0.
 -- Es funcion auxiliar de listaPalabras
 izquierda :: Texto -> Integer -> Texto
 izquierda s 0 = []
 izquierda (c:cs) n = c : izquierda cs (n-1)
 
--- Dado un Texto, una lista de integers representando los espacios y un Integer
+-- Función auxiliar listaPalabras: dado un Texto, una lista de integers
+-- representando las posiciones de los espacios del texto y un Integer
 -- que representa el espacio anterior (debe ser 0 al inicio), separa
 -- las palabras del Texto y las pone en una lista.
 -- Es funcion auxiliar de reversoPalabras
@@ -216,20 +217,22 @@ listaPalabras (' ':s) (e:es) n = derecha (izquierda (' ':s) e) n : listaPalabras
 listaPalabras s (e:es) 0 = izquierda s e : listaPalabras s es e
 listaPalabras s (e:es) n = derecha (izquierda s e) n : listaPalabras s es e
 
--- Dada una lista de palabras, revierte cada una de ellas.
+-- Función auxiliar reversoListaPalabras: dada una lista de palabras, revierte
+-- cada una de ellas.
 -- Es funcion auxiliar de reversoPalabras
 reversoListaPalabras :: [Texto] -> [Texto]
 reversoListaPalabras [] = []
 reversoListaPalabras (p:ps) = reverso p : reversoListaPalabras ps
 
--- Dada una lista de palabras genera un texto con las palabras separadas por
--- espacios.
+-- Función auxiliar listaPalabrasATexto: dada una lista de palabras genera un
+-- texto con las palabras de la lista separadas por espacios.
 -- Es funcion auxiliar de reversoPalabras
 listaPalabrasATexto :: [Texto] -> Texto
 listaPalabrasATexto (p:[]) = p
 listaPalabrasATexto (p:ps) = p ++ " " ++ listaPalabrasATexto ps
 
--- Dado un texto, devuelve cada palabra del texto al revés.
+-- Función auxiliar reversoPalabras: dado un texto, devuelve cada palabra del
+-- texto al revés.
 -- Es funcion auxiliar de cifrarPalabrasReverso
 reversoPalabras :: Texto -> Texto
 reversoPalabras s = listaPalabrasATexto (reversoListaPalabras (listaPalabras s (posicionesEspacios s 0) 0))
