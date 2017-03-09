@@ -84,7 +84,7 @@ extraerMensajeParaEnvio (CifradoReverso m) = extraerMensajeParaEnvio m
 extraerMensajeParaEnvio (CifradoCesar m n) = extraerMensajeParaEnvio m
 extraerMensajeParaEnvio (CifradoPalabrasReverso m) = extraerMensajeParaEnvio m
 
--- Ejemplo Función extraerMensajeParaEnvio extendida
+-- Ejemplo función extraerMensajeParaEnvio extendida
 --
 -- *Main> extraerMensajeParaEnvio (CifradoReverso (CifradoCesar (CifradoPalabrasReverso (TextoClaro "VCTQNCU JQNC")) 2))
 -- "VCTQNCU JQNC"
