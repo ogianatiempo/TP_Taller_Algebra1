@@ -57,6 +57,8 @@ esMensajeCifrado :: Mensaje -> Bool
 esMensajeCifrado (TextoClaro t) = False
 esMensajeCifrado _ = True
 
+-- Ejemplos Función esMensajeCifrado
+--
 -- *Main> esMensajeCifrado (TextoClaro "HOLA TAROLAS")
 -- False
 -- it :: Bool
@@ -79,7 +81,7 @@ cifrarReverso :: Mensaje -> Mensaje
 cifrarReverso (TextoClaro t) = CifradoReverso (TextoClaro (reverso t))
 cifrarReverso (CifradoReverso m) = CifradoReverso (cifrarReverso m)
 
--- Ejemplo función cifrarReverso
+-- Ejemplos función cifrarReverso
 --
 -- *Main> cifrarReverso (TextoClaro "EL POSTRE")
 -- CifradoReverso (TextoClaro "ERTSOP LE")
@@ -97,7 +99,7 @@ extraerMensajeParaEnvio :: Mensaje -> Texto
 extraerMensajeParaEnvio (TextoClaro t) = t
 extraerMensajeParaEnvio (CifradoReverso m) = extraerMensajeParaEnvio m
 
--- Ejemplo Función extraerMensajeParaEnvio
+-- Ejemplos Función extraerMensajeParaEnvio
 --
 -- *Main> extraerMensajeParaEnvio (TextoClaro "EL POSTRE")
 -- "EL POSTRE"
@@ -118,7 +120,7 @@ descifrar :: Mensaje -> Texto
 descifrar (TextoClaro t) = t
 descifrar (CifradoReverso m) = reverso (descifrar m)
 
--- Ejemplo función descifrar
+-- Ejemplos función descifrar
 --
 -- *Main> descifrar (CifradoReverso (TextoClaro "ERTSOP LE"))
 -- "EL POSTRE"
@@ -138,7 +140,7 @@ descifrar (CifradoReverso m) = reverso (descifrar m)
 esAptoReverso :: Mensaje -> Bool
 esAptoReverso m = extraerMensajeParaEnvio m /= extraerMensajeParaEnvio (cifrarReverso m)
 
--- Ejemplo función esAptoReverso
+-- Ejemplos función esAptoReverso
 --
 -- *Main> esAptoReverso (TextoClaro "SOPAPOS")
 -- False
