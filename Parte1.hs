@@ -2,12 +2,15 @@
 -- Jorge, Mamani Fernandez - 23/08 - papelyto_god@hotmail.com
 
 
+
 -- Definicion de los tipos ----------------------------------------------------
 -- Renombre para tipo Texto
 type Texto = [Char]
 
 -- Definición del tipo recursivo Mensaje
 data Mensaje = TextoClaro Texto | CifradoReverso Mensaje   deriving (Eq, Show)
+
+
 
 -- EJERCICIO 1 ----------------------------------------------------------------
 -- Funcion crearMensaje: dado un Texto devuelve un Mensaje en TextoClaro
@@ -45,6 +48,7 @@ crearMensaje t | esTextoPermitido t && length t > 0 = TextoClaro t
 -- *** Exception: Parte1.hs:72:1-50: Non-exhaustive patterns in function crearMensaje
 
 
+
 -- EJERCICIO 2 ----------------------------------------------------------------
 -- Función esMensajeCifrado: dado un Mensaje devuelve True si y sólo si el
 -- Mensaje ya ha sido cifrado.
@@ -60,6 +64,7 @@ esMensajeCifrado _ = True
 -- *Main> esMensajeCifrado (CifradoReverso (TextoClaro "SALORAT ALOH"))
 -- True
 -- it :: Bool
+
 
 
 -- EJERCICIO 3 ----------------------------------------------------------------
@@ -83,6 +88,7 @@ cifrarReverso (CifradoReverso m) = CifradoReverso (cifrarReverso m)
 -- CifradoReverso (CifradoReverso (TextoClaro "EL POSTRE"))
 
 
+
 -- EJERCICIO 4 ----------------------------------------------------------------
 -- Función extraerMensajeParaenvio: dado un Mensaje nos develve un Texto listo 
 -- para ser enviado, que se corresponde con el mensaje ya cifrado.
@@ -90,7 +96,6 @@ cifrarReverso (CifradoReverso m) = CifradoReverso (cifrarReverso m)
 extraerMensajeParaEnvio :: Mensaje -> Texto
 extraerMensajeParaEnvio (TextoClaro t) = t
 extraerMensajeParaEnvio (CifradoReverso m) = extraerMensajeParaEnvio m
-
 
 -- Ejemplo Función extraerMensajeParaEnvio
 --
@@ -102,6 +107,7 @@ extraerMensajeParaEnvio (CifradoReverso m) = extraerMensajeParaEnvio m
 -- "ERTSOP LE"
 -- it :: Texto
 --
+
 
 
 -- EJERCICIO 5 ----------------------------------------------------------------
@@ -121,6 +127,7 @@ descifrar (CifradoReverso m) = reverso (descifrar m)
 -- *Main> descifrar (cifrarReverso (cifrarReverso (TextoClaro "HOLA TAROLAS")))
 -- "HOLA TAROLAS"
 -- it :: Texto
+
 
 
 -- EJERCICIO 6 ----------------------------------------------------------------
