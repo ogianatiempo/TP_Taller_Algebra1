@@ -21,7 +21,7 @@ data Mensaje = TextoClaro Texto
 
 -- Funciones de la parte1 extendidas (EJERCICIO 10) ----------------------------
 -- EJERCICIO 1 -----------------------------------------------------------------
--- Sin cambios respecto de la Parte 1. 
+-- Sin cambios respecto de la Parte 1.
 
 pertenece :: Char -> String -> Bool
 pertenece c [] = False
@@ -40,7 +40,7 @@ crearMensaje t | esTextoPermitido t && length t > 0 = TextoClaro t
 
 -- EJERCICIO 2 -----------------------------------------------------------------
 -- Sin cambios respecto de la Parte 1, ya que la función me sigue percibiendo
--- cualquier Mensaje, que no se TextoClaro, como mensaje cifrado.
+-- cualquier Mensaje, que no sea TextoClaro, como mensaje cifrado.
 
 esMensajeCifrado :: Mensaje -> Bool
 esMensajeCifrado (TextoClaro t) = False
@@ -109,10 +109,19 @@ descifrar (CifradoPalabrasReverso m) = reversoPalabras (descifrar m)
 
 
 -- EJERCICIO 6 -----------------------------------------------------------------
--- Sin cambios respecto de la Parte 1.
+-- Sin cambios respecto de la Parte 1. Esta definición ya funciona para el tipo
+-- extendido.
 
 esAptoReverso :: Mensaje -> Bool
 esAptoReverso m = extraerMensajeParaEnvio m /= extraerMensajeParaEnvio (cifrarReverso m)
+
+-- Ejemplo de la función esAptoReverso
+--
+-- *Main> esAptoReverso (CifradoCesar (TextoClaro "VMCYCMV") 8)
+-- False
+--
+-- *Main> esAptoReverso (CifradoPalabrasReverso (TextoClaro "NEUQUEN NEUQUEN"))
+-- False
 
 
 
