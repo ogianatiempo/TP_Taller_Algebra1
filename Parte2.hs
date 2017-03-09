@@ -1,6 +1,8 @@
 -- Octavio, Gianatiempo - 280/10 - ogianatiempo@gmail.com
 -- Jorge, Mamani Fernandez - 23/08 - papelyto_god@hotmail.com
 
+
+
 -- Definicion de los tipos -----------------------------------------------------
 -- Renombre para tipo Texto
 type Texto = [Char]
@@ -15,27 +17,6 @@ data Mensaje = TextoClaro Texto
                | CifradoPalabrasReverso Mensaje
                deriving (Eq, Show)
 
--- Textos para probar las funciones: -------------------------------------------
-t1 :: Texto
-t1 = "TENGA USTED BUENAS TARDES"
-
-t2 :: Texto
-t2 = "SIEMPRE REVERSO"
-
-t3 :: Texto
-t3 = "NEUQUEN"
-
-t4 :: Texto
-t4 = "ANANA"
-
-t5 :: Texto
-t5 = "OJOTA"
-
-t6 :: Texto
-t6 = "LINEA C RETIRO CONSTITUCION "
-
-t7 :: Texto
-t7 = "UNO DOS TRES PROBANDO"
 
 
 -- Funciones de la parte1 extendidas (EJERCICIO 10) ----------------------------
@@ -144,15 +125,19 @@ esAptoReverso m = extraerMensajeParaEnvio m /= extraerMensajeParaEnvio (cifrarRe
 
 -- Ejemplo función esAptoReverso
 --
--- *Main> esAptoReverso (TextoClaro "sopapos")
+-- *Main> esAptoReverso (TextoClaro "SOPAPOS")
 -- False
 -- it :: Bool
 --
--- *Main> esAptoReverso (TextoClaro "sopa")
+-- *Main> esAptoReverso (TextoClaro "SOPA")
 -- True
 -- it :: Bool
 
+
+
 -- EJERCICIO 8 ----------------------------------------------------------------
+-- Función cifradoCesar: Dado un Mensaje y un Desplazamiento, devuelve un Mensaje
+-- encriptado con el cifrado Cesar (con el dezplazamiento indicado).
 
 -- Dado un caracter, devuelve el caracter siguiente.
 -- Es funcion auxiliar de cifrarCaracter
@@ -196,7 +181,11 @@ cifrarCesar (CifradoPalabrasReverso m) n = CifradoPalabrasReverso (cifrarCesar m
 -- CifradoReverso (CifradoPalabrasReverso (CifradoCesar (TextoClaro "MVDBT UJP IPMB") 1))
 -- it :: Mensaje
 
+
+
 -- EJERCICIO 9 ----------------------------------------------------------------
+-- Función cifrarPalabrasReverso: Dado un Mensaje, me lo cifra con el método del
+-- cifrado de las Palabras Reverso.
 
 -- Dado un Texto y un Integer que representa el valor para la posicion del
 -- primer caracter del texto, devuelve las posiciones de los espacios.
