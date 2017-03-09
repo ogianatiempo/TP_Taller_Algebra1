@@ -192,8 +192,8 @@ derecha :: Texto -> Integer -> Texto
 derecha (c:cs) 0 = cs
 derecha (c:cs) n = derecha cs (n-1)
 
--- Función auxiliar izuqierda: dado un texto y un integer, recorta la parte
--- derecha del texto justo antes de la posicion indicada por el integer. Es
+-- Función auxiliar izquierda: dado un Texto y un Integer, recorta la parte
+-- derecha del texto justo antes de la posición indicada por el Integer. Es
 -- decir, se queda con la parte izquierda.
 -- Asume que la primera posicion es 0.
 -- Es funcion auxiliar de listaPalabras
@@ -202,7 +202,7 @@ izquierda s 0 = []
 izquierda (c:cs) n = c : izquierda cs (n-1)
 
 -- Función auxiliar listaPalabras: dado un Texto, una lista de integers
--- representando las posiciones de los espacios del texto y un Integer
+-- representando las posiciones de los espacios del Texto y un Integer
 -- que representa el espacio anterior (debe ser 0 al inicio), separa
 -- las palabras del Texto y las pone en una lista.
 -- Es funcion auxiliar de reversoPalabras
@@ -225,7 +225,7 @@ reversoListaPalabras [] = []
 reversoListaPalabras (p:ps) = reverso p : reversoListaPalabras ps
 
 -- Función auxiliar listaPalabrasATexto: dada una lista de palabras genera un
--- texto con las palabras de la lista separadas por espacios.
+-- Texto con las palabras de la lista separadas por espacios.
 -- Es funcion auxiliar de reversoPalabras
 listaPalabrasATexto :: [Texto] -> Texto
 listaPalabrasATexto (p:[]) = p
