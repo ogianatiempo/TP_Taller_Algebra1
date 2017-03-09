@@ -14,13 +14,20 @@ data Mensaje = TextoClaro Texto | CifradoReverso Mensaje   deriving (Eq, Show)
 -- Debe chequear que el Texto este compuesto de cualquier elemento de la lista
 -- de la A a la Z y espacios. Sino se debe indefinir
 
+-- Función auxiliar pertenece: Dado un Char (caracter) y un String (lista de
+-- caracteres), me indica si el caracter pertenece o no a la lista (True o False).
 pertenece :: Char -> String -> Bool
 pertenece c [] = False
 pertenece c (l:ls) = c == l || pertenece c ls
 
+-- Función esCaracterPermitido: Dado un caracter, me indica si el caracter es
+-- un caracter permitido. Es considerado permitido si el caracter es el espacio
+-- o algunas de las 26 letras mayúsculas del abecedario.
 esCaracterPermitido :: Char -> Bool
 esCaracterPermitido c = pertenece c (' ':['A'..'Z'])
 
+-- Función esTextoPermitido: Dado un Texto, devuelve True si el texto está formado
+-- pura y exclusivamente por los caracteres permitidos.
 esTextoPermitido :: Texto -> Bool
 esTextoPermitido [] = True
 esTextoPermitido (l:ls) = esCaracterPermitido l && esTextoPermitido ls
@@ -56,8 +63,9 @@ esMensajeCifrado _ = True
 
 
 -- EJERCICIO 3 ----------------------------------------------------------------
--- Función cifrarReverso: dado un Mensaje, lo encripta con el cifrado reverso.
+-- Función cifrarReverso: Dado un Mensaje, lo encripta con el cifrado reverso.
 
+-- Función reverso: Dado Texto, me devuelve el texto invertido.
 reverso :: Texto -> Texto
 reverso [] = []
 reverso (t:ts) = reverso ts ++ [t]
