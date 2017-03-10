@@ -14,7 +14,7 @@ data Mensaje = TextoClaro Texto | CifradoReverso Mensaje   deriving (Eq, Show)
 
 -- EJERCICIO 1 ----------------------------------------------------------------
 -- Funcion crearMensaje: dado un Texto devuelve un Mensaje en TextoClaro
--- Debe chequear que el Texto este compuesto de cualquier elemento de la lista
+-- Debe chequear que el Texto esté compuesto de cualquier elemento de la lista
 -- de la A a la Z y espacios. Sino se debe indefinir
 
 -- Función auxiliar pertenece: Dado un Char (caracter) y un String (lista de
@@ -25,7 +25,7 @@ pertenece c (l:ls) = c == l || pertenece c ls
 
 -- Función auxiliar esCaracterPermitido: Dado un caracter, me indica si el
 -- caracter es un caracter permitido. Es considerado permitido si el caracter es
--- el espacio o algunas de las 26 letras mayúsculas del abecedario.
+-- el espacio o alguna de las 26 letras mayúsculas del abecedario.
 esCaracterPermitido :: Char -> Bool
 esCaracterPermitido c = pertenece c (' ':['A'..'Z'])
 
